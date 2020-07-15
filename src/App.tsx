@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import { AutoComplete } from './components/AutoComplete';
-import { RootState } from './core/reducers';
-import UserActions from './core/reducers/user';
+import { RootState } from './redux/reducers';
+import UserActions from './redux/reducers/user';
 import { Flex, Box } from './common/style';
 import { Button } from './components/Button';
 
@@ -34,63 +34,65 @@ function App() {
   `;
 
   return (
-    <Flex justifyContent='center' mt={4}>
-      {isSubmitted && (
-        <StyledDisplay>
-          <Flex>
-            <Box pr={2}>name:</Box>
-            {selectedItem?.name}
-          </Flex>
-          <Flex>
-            <Box pr={2}>username:</Box>
-            {selectedItem?.username}
-          </Flex>
-          <Flex>
-            <Box pr={2}>email:</Box>
-            {selectedItem?.email}
-          </Flex>
-          <Flex>
-            <Box pr={2}>address:</Box>
-            <Box>
+    <Flex justifyContent='center'>
+      <Box mt={4}>
+        {isSubmitted && (
+          <StyledDisplay>
+            <Flex>
+              <Box pr={2}>name:</Box>
+              {selectedItem?.name}
+            </Flex>
+            <Flex>
+              <Box pr={2}>username:</Box>
+              {selectedItem?.username}
+            </Flex>
+            <Flex>
+              <Box pr={2}>email:</Box>
+              {selectedItem?.email}
+            </Flex>
+            <Flex>
+              <Box pr={2}>address:</Box>
               <Box>
-                {selectedItem?.address.street},{selectedItem?.address.city},
-                {selectedItem?.address.zipcode}
+                <Box>
+                  {selectedItem?.address.street},{selectedItem?.address.city},
+                  {selectedItem?.address.zipcode}
+                </Box>
+                <Box>{selectedItem?.address.suite}</Box>
               </Box>
-              <Box>{selectedItem?.address.suite}</Box>
+            </Flex>
+            <Flex>
+              <Box pr={2}>phone:</Box>
+              {selectedItem?.phone}
+            </Flex>
+            <Flex>
+              <Box pr={2}>website:</Box>
+              {selectedItem?.website}
+            </Flex>
+            <Flex>
+              <Box pr={2}>company:</Box>
+              <Box>{selectedItem?.company.name}</Box>
+            </Flex>
+          </StyledDisplay>
+        )}
+        {!isSubmitted && (
+          <Flex alignItems='center' pt={4}>
+            <AutoComplete
+              items={users.asMutable({ deep: true })}
+              onSelect={onSelect}
+              setSubmit={setSubmit}
+            />
+            <Box pl={2}>
+              <Button
+                onClick={() => {
+                  selectedItem && setSubmit(true);
+                }}
+              >
+                submit
+              </Button>
             </Box>
           </Flex>
-          <Flex>
-            <Box pr={2}>phone:</Box>
-            {selectedItem?.phone}
-          </Flex>
-          <Flex>
-            <Box pr={2}>website:</Box>
-            {selectedItem?.website}
-          </Flex>
-          <Flex>
-            <Box pr={2}>company:</Box>
-            <Box>{selectedItem?.company.name}</Box>
-          </Flex>
-        </StyledDisplay>
-      )}
-      {!isSubmitted && (
-        <Flex alignItems='center'>
-          <AutoComplete
-            items={users.asMutable({ deep: true })}
-            onSelect={onSelect}
-            setSubmit={setSubmit}
-          />
-          <Box pl={2}>
-            <Button
-              onClick={() => {
-                selectedItem && setSubmit(true);
-              }}
-            >
-              submit
-            </Button>
-          </Box>
-        </Flex>
-      )}
+        )}
+      </Box>
     </Flex>
   );
 }
