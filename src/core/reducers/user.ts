@@ -1,11 +1,11 @@
-import { createReducer, createActions } from "reduxsauce";
-import Immutable, { ImmutableObject } from "seamless-immutable";
+import { createReducer, createActions } from 'reduxsauce';
+import Immutable, { ImmutableObject } from 'seamless-immutable';
 
 /* ------------- Types and Action Creators ------------- */
 const { Types, Creators } = createActions({
   requestUsers: [],
-  successUsers: ["data"],
-  failureUsers: ["error"]
+  successUsers: ['data'],
+  failureUsers: ['error'],
 });
 
 export const UserActionTypes = Types;
@@ -22,7 +22,7 @@ export interface UserState {
 export const INITIAL_STATE = Immutable<UserState>({
   data: [],
   fetching: false,
-  error: undefined
+  error: undefined,
 });
 
 type State = ImmutableObject<UserState>;
@@ -45,5 +45,5 @@ const failure = (state: State, { error }: ErrorAction) =>
 export const userReducer = createReducer(INITIAL_STATE, {
   [Types.REQUEST_USERS]: request,
   [Types.SUCCESS_USERS]: success,
-  [Types.FAILURE_USERS]: failure
+  [Types.FAILURE_USERS]: failure,
 });

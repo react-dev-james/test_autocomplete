@@ -1,7 +1,7 @@
-import { call, put } from "redux-saga/effects";
+import { call, put } from 'redux-saga/effects';
 
-import UserActions from "../reducers/user";
-import { createApi } from "../services/api";
+import UserActions from '../reducers/user';
+import { createApi } from '../services/api';
 
 export function* requestUsers() {
   const api = createApi();
