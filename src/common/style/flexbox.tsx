@@ -6,7 +6,6 @@ export const Flex = styled(BaseFlex).attrs({
 })`
   padding: 0;
   border: 0;
-  vertical-align: baseline;
   display: block;
   box-sizing: border-box;
   line-height: 100%;
@@ -22,7 +21,6 @@ export const FlexWithRelative = styled(Flex)`
 export const Box = styled(BaseBox)`
   padding: 0;
   border: 0;
-  vertical-align: baseline;
   display: block;
   box-sizing: border-box;
   line-height: 100%;
